@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Controle de Gado Leiteiro</title>
+	<style>
+		.form-cadastro {
+			float: left;
+			margin-right: 30px;
+		}
+
+		.form-consulta {
+			float: right;
+		}
+
+		h1 {
+			clear: both;
+		}
+
+		label,
+		input {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		button {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>CONTROLE DE GADO</h1>
+
+	<div class="form-cadastro">
+		<h2>Cadastrar Animal</h2>
+		<form id="form-animal">
+			<label for="numeroProdutor">Número do Produtor</label>
+			<input type="number" id="numeroProdutor" name="numeroProdutor" required>
+			<label for="cpfProdutor">CPF do Produtor</label>
+			<input type="text" id="cpfProdutor" name="cpfProdutor" required>
+			<label for="numeroIdentificacao">Número de Identificação do Animal</label>
+			<input type="text" id="numeroIdentificacao" name="numeroIdentificacao" required>
+			<label for="nomeAnimal">Nome do Animal</label>
+			<input type="text" id="nomeAnimal" name="nomeAnimal" required>
+			<label for="dataNascimento">Data de Nascimento</label>
+			<input type="date" id="dataNascimento" name="dataNascimento" required>
+			<label for="sexo">Sexo</label>
+			<select id="sexo" name="sexo" required>
+				<option value="">Selecione...</option>
+				<option value="M">Macho</option>
+				<option value="F">Fêmea</option>
+			</select>
+			<label for="peso">Peso</label>
+			<input type="number" id="peso" name="peso" step="0.01" required>
+			<button type="submit">Adicionar</button>
+		</form>
+	</div>
+
+	<div class="form-consulta">
+		<h2>Consultar animais disponíveis</h2>
+		<label for="dataConsulta">Digite a data para verificar os animais disponíveis</label>
+		<input type="date" id="dataConsulta" name="dataConsulta">
+		<button type="button" id="btnConsultar">Consultar animais disponíveis</button>
+		<p id="qtdCabeças"></p>
+	</div>
+
+
+	<script>
+		const formAnimal = document.querySelector("#form-animal");
+		const btnConsultar = document.querySelector("#btnConsultar");
+		const tableAnimais = document.querySelector("#table-animais");
+		const qtdCabecas = document.querySelector("#qtdCabeças");
+
+		formAnimal.addEventListener("submit", (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(formAnimal);
+
+			fetch("/animal", {
+				method: "POST",
+				body: JSON.stringify(Object.fromEntries(formData.entries())),
+				headers: { "Content-type": "application/json; charset=UTF-8" },
+			})
+				.then((response) => {
+					if (response.ok) {
+						alert("Animal cadastrado com sucesso!");
+						formAnimal.reset();
+					} else {
+						alert("Erro ao cadastrar animal!");
+					}
+				});
+		});
+
+
+		btnConsultar.addEventListener("click", () => {
+			const dataConsulta = document.querySelector("#dataConsulta").value;
+
+			fetch(`/animal/disponiveis/${dataConsulta}`)
+				.then((response) => response.json())
+				.then((data) => {
+					qtdCabeças.innerHTML = data;
+				});
+		});
+
+	</script>
