@@ -25,6 +25,9 @@ public class ControleDeGado implements Serializable {
 
 	@Column(name = "cpf_produtor")
 	private String cpfProdutor;
+	
+	@Column(name = "numero_propriedade")
+	private String numeroPropriedade;
 
 	@Column(name = "numero_identificacao")
 	private String numeroIdentificacao;
@@ -80,6 +83,14 @@ public class ControleDeGado implements Serializable {
 	public void setCpfProdutor(String cpfProdutor) {
 		this.cpfProdutor = cpfProdutor;
 	}
+	
+	public String getNumeroPropriedade() {
+		return numeroPropriedade;
+	}
+
+	public void setNumeroPropriedade(String numeroPropriedade) {
+		this.numeroPropriedade = numeroPropriedade;
+	}
 
 	public String getNumeroIdentificacao() {
 		return numeroIdentificacao;
@@ -125,7 +136,11 @@ public class ControleDeGado implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+	@Override
+	public String toString() {
+	    return id + "," + nomeAnimal + "," + dataNascimento + "," + peso;
+	}
+
 
 }
 

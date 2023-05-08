@@ -3,47 +3,110 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Controle de Gado Leiteiro</title>
+	<title>Controle de Gado</title>
 	<style>
-		.form-cadastro {
-			float: left;
-			margin-right: 30px;
-		}
+	
+	.container {
+  display: flex;
+  grid-gap: 10px;  /* Simply adjust this value !*/
+  grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
+  grid-auto-rows: 1fr; 
+  text-align: center;
+}
 
-		.form-consulta {
-			float: right;
-		}
+.container > div:nth-child(1) {
+  width: 14%;
+  }
+
+.container > div:nth-child(2) {
+  flex-grow: 2;
+  }
+
+.container > div:nth-child(3) {
+  width: 20%;
+ }
+
+.container>div {
+	width: 60%;
+   height: 80%;
+}
+
+#disponiveis {
+	border: 1px solid black;
+	padding: 0px;
+	height: 0px;
+	width: 80%;
+	margin: auto;
+	display: none; /* esconde a tabela por padrão */
+}
+
+#disponiveis.visible {
+	display: block; /* mostra a tabela quando a classe "visible" é adicionada */
+}
+
 
 		h1 {
+			text-align: center;
 			clear: both;
 		}
+		
 
-		label,
-		input {
+		label, input [type="date"] {
 			display: block;
-			margin-bottom: 10px;
-		}
+			margin-bottom: 0px;
+			text-align: center;
+			padding: 0px;
+			}
+			
+			select {
+				margin-bottom: 15px;
+			}
+			
+			
+			form [type="number"], form [type="text"], form [type="date"]{
+    		display: block;
+   			 margin: auto;
+   			 margin-bottom: 15px;
+			}
 
 		button {
-			margin-top: 10px;
+			margin-top: 15px;
+			
 		}
+		
+		
+  table {
+    text-align: center;
+  border-collapse: collapse;
+  }
+  
+   
+  table th, table tr, table td {
+	border: 1px solid black;
+	text-align: center;
+   	margin: auto;
+}
+  
 	</style>
 </head>
 
 <body>
 	<h1>CONTROLE DE GADO</h1>
-
-	<div class="form-cadastro">
-		<h2>Cadastrar Animal</h2>
+	
+<div class="container">
+  	<div>
+  		<h2>Cadastrar Animal</h2>
 		<form id="form-animal">
 			<label for="numeroProdutor">Número do Produtor</label>
-			<input type="number" id="numeroProdutor" name="numeroProdutor" required>
+			<input type="text" id="numeroProdutor" name="numeroProdutor" required maxlength="7" onkeypress="return somenteNumeros(event);" >
 			<label for="cpfProdutor">CPF do Produtor</label>
-			<input type="text" id="cpfProdutor" name="cpfProdutor" required>
+			<input type="text" id="cpfProdutor" name="cpfProdutor" required minlength="11" maxlength="11"  onkeypress="return somenteNumeros(event);">
+			<label for="numeroPropriedade">Número da Propriedade</label>
+			<input type="text" id="numeroPropriedade" name="numeroPropriedade" required maxlength="7" onkeypress="return somenteNumeros(event);">			
 			<label for="numeroIdentificacao">Número de Identificação do Animal</label>
-			<input type="text" id="numeroIdentificacao" name="numeroIdentificacao" required>
+			<input type="text" id="numeroIdentificacao" name="numeroIdentificacao" required maxlength="7" onkeypress="return somenteNumeros(event);">
 			<label for="nomeAnimal">Nome do Animal</label>
-			<input type="text" id="nomeAnimal" name="nomeAnimal" required>
+			<input type="text" id="nomeAnimal" name="nomeAnimal" required="required"   maxlength="15" onkeypress="return lettersOnly(event);" />
 			<label for="dataNascimento">Data de Nascimento</label>
 			<input type="date" id="dataNascimento" name="dataNascimento" required>
 			<label for="sexo">Sexo</label>
@@ -53,55 +116,337 @@
 				<option value="F">Fêmea</option>
 			</select>
 			<label for="peso">Peso</label>
-			<input type="number" id="peso" name="peso" step="0.01" required>
+			<input type="number" id="peso" name="peso" step="0.01" required onkeyup="somenteNumeros(this);">
 			<button type="submit">Adicionar</button>
 		</form>
 	</div>
+		
+  <div>
+  <h2>Listar todos os animais</h2>
+  <button onclick="consultarTotalAnimais()">Listar animais</button>
+  <p></p>
 
-	<div class="form-consulta">
-		<h2>Consultar animais disponíveis</h2>
+  <table align="center" id="tabelaAnimais">
+    <thead>
+      <tr>
+        <th width="100px">Nº do Produtor</th>
+        <th width="200px">Nº do Animal</th>
+        <th width="200px">Nome do Animal</th>
+        <th width="200px">Data de nascimento</th>
+        <th width="200px">Peso</th>
+        <th width="200px">Nº da Propriedade</th>
+        <th width="200px">Editar/Excluir</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="filtroProdutor" class="filtro" placeholder="Filtrar"></th>
+        <th><input type="text" id="filtroIdentificacao" class="filtro" placeholder="Filtrar"></th>
+        <th><input type="text" id="filtroNome" class="filtro" placeholder="Filtrar"></th>
+        <th><input type="text" id="filtroData" class="filtro" placeholder="Filtrar"></th>
+        <th><input type="text" id="filtroPeso" class="filtro" placeholder="Filtrar"></th>
+        <th><input type="text" id="filtroPropriedade" class="filtro" placeholder="Filtrar"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aqui serão adicionadas as linhas da tabela -->
+    </tbody>
+ 	 </table>
+	</div>
+
+	<div>
+ 	 <h2>Consultar animais disponíveis</h2>
 		<label for="dataConsulta">Digite a data para verificar os animais disponíveis</label>
 		<input type="date" id="dataConsulta" name="dataConsulta">
 		<button type="button" id="btnConsultar">Consultar animais disponíveis</button>
-		<p id="qtdCabeças"></p>
+		<p></p>
+		<table id=disponiveis>
+			<tr>
+				<td>
+					<p id="qtdCabeças"></p>
+				</td>
+			</tr>
+		</table> 		 		
 	</div>
+</div>
 
+	
+	
 
 	<script>
 		const formAnimal = document.querySelector("#form-animal");
 		const btnConsultar = document.querySelector("#btnConsultar");
-		const tableAnimais = document.querySelector("#table-animais");
+		const tabelaAnimais = document.querySelector("#tabelaAnimais");
 		const qtdCabecas = document.querySelector("#qtdCabeças");
 
 		formAnimal.addEventListener("submit", (event) => {
-			event.preventDefault();
+ 		 event.preventDefault();
 
-			const formData = new FormData(formAnimal);
+  if (validateForm()) {
+    const formData = new FormData(formAnimal);
 
-			fetch("/animal", {
-				method: "POST",
-				body: JSON.stringify(Object.fromEntries(formData.entries())),
-				headers: { "Content-type": "application/json; charset=UTF-8" },
-			})
-				.then((response) => {
-					if (response.ok) {
-						alert("Animal cadastrado com sucesso!");
-						formAnimal.reset();
-					} else {
-						alert("Erro ao cadastrar animal!");
-					}
-				});
-		});
+    fetch("/animal", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(formData.entries())),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) => {
+        if (response.ok) {
+          consultarTotalAnimais();
+          alert("Animal cadastrado com sucesso!");
+          formAnimal.reset();
+        } else {
+          alert("Erro ao cadastrar animal!");
+        }
+      });
+  }
+});
+
+function cpf(v){
+    v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+                                             //de novo (para o segundo bloco de números)
+    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+    return v
+}
+
+function somenteNumeros(event) {
+	var er = /[^0-9.]/;
+	if (er.test(event.key)) {
+		return false
+	}
+	return true;
+}
+    
+function lettersOnly(evt) {
+    evt = (evt) ? evt : event;
+    var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+        ((evt.which) ? evt.which : 0));
+    if (charCode > 31 && (charCode < 65 || charCode > 90) &&
+        (charCode < 97 || charCode > 122)) {
+        return false;
+    }
+    return true;
+}
+
+function validateForm() {
+  const numeroProdutor = document.querySelector("#numeroProdutor").value;
+  const cpfProdutor = document.querySelector("#cpfProdutor").value;
+  const numeroPropriedade = document.querySelector("#numeroPropriedade").value;
+  const numeroIdentificacao = document.querySelector("#numeroIdentificacao").value;
+  const nomeAnimal = document.querySelector("#nomeAnimal").value;
+  const dataNascimento = document.querySelector("#dataNascimento").value;
+  const sexo = document.querySelector("#sexo").value;
+  const peso = document.querySelector("#peso").value;
+
+  // Validação do número do produtor
+  if (numeroProdutor.maxlength == 7) {
+    alert("O número do produtor deve ter 7 dígitos.");
+    return false;
+  }
+
+  // Validação do CPF do produtor
+  if (cpfProdutor.length !== 11) {
+    alert("O CPF do produtor deve ter 11 dígitos.");
+    return false;
+  }
+
+  // Validação do número da propriedade
+  if (numeroPropriedade === "") {
+    alert("O número da propriedade é obrigatório.");
+    return false;
+  }
+
+  // Validação do número de identificação do animal
+  if (numeroIdentificacao === "") {
+    alert("O número de identificação do animal é obrigatório.");
+    return false;
+  }
+
+  // Validação do nome do animal
+  if (nomeAnimal === "") {
+    alert("O nome do animal é obrigatório.");
+    return false;
+  }
+
+  // Validação da data de nascimento
+  if (dataNascimento === "") {
+    alert("A data de nascimento é obrigatória.");
+    return false;
+  }
+
+  // Validação do sexo
+  if (sexo === "") {
+    alert("O sexo é obrigatório.");
+    return false;
+  }
+
+  // Validação do peso
+  if (peso === "" || peso <= 0) {
+    alert("O peso é obrigatório e deve ser maior que zero.");
+    return false;
+  }
+
+  return true;
+}
+
+
 
 
 		btnConsultar.addEventListener("click", () => {
-			const dataConsulta = document.querySelector("#dataConsulta").value;
+  const dataConsulta = document.querySelector("#dataConsulta").value;
+  
 
-			fetch(`/animal/disponiveis/${dataConsulta}`)
-				.then((response) => response.json())
-				.then((data) => {
-					qtdCabeças.innerHTML = data;
-				});
-		});
+  fetch(`/animal/disponiveis/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+      const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdCabeças.innerHTML = `Em ${dataFormatada}, ${data} animais estarão disponíveis para abate`;
+      
+      // Mostra a div com a resposta e ajusta a altura
+      const divQtdCabeças = document.querySelector("#disponiveis");
+      divQtdCabeças.style.display = "block";
+      divQtdCabeças.style.height = "auto";
+    });
+});
+
+		
+		// Função para consultar o total de animais
+function consultarTotalAnimais() {
+  fetch('/animal/cabeças-de-gado?size=50')
+    .then(response => response.json())
+    .then(data => preencherTabela(data.content))
+    .catch(error => console.error(error));
+}
+
+// Objeto para armazenar a ordenação da tabela
+let ordenacao = {
+  coluna: null,
+  ordem: null
+};
+
+// Função para preencher a tabela com os dados dos animais
+function preencherTabela(animais) {
+  const tabela = document.getElementById('tabelaAnimais');
+  const tbody = tabela.querySelector('tbody');
+  const ths = tabela.querySelectorAll('th');
+  const filtroRow = document.getElementById('filtroRow');
+  tbody.innerHTML = ''; // Limpa a tabela
+  
+  // Preenche a tabela com os animais
+  animais.forEach(animal => {
+    const tr = document.createElement('tr');
+    
+    // Converte a data para o formato dd/mm/aaaa
+    const dataNascimento = new Date(animal.dataNascimento);
+    const dia = dataNascimento.getDate().toString().padStart(2, '0');
+    const mes = (dataNascimento.getMonth() + 1).toString().padStart(2, '0');
+    const ano = dataNascimento.getFullYear().toString();
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+    
+    tr.innerHTML = `
+  <td data-coluna="numeroProdutor">${animal.numeroProdutor}</td>
+  <td data-coluna="numeroIdentificacao">${animal.numeroIdentificacao}</td>
+  <td data-coluna="nomeAnimal">${animal.nomeAnimal}</td>
+  <td data-coluna="dataFormatada">${dataFormatada}</td>
+  <td data-coluna="peso">${animal.peso} Kg</td>
+  <td data-coluna="numeroPropriedade">${animal.numeroPropriedade}</td>
+  <td>
+    <button type="button" class="btn btn-sm btn-primary" onclick="editAnimal(${animal.id})">Editar</button>
+    <button type="button" class="btn btn-sm btn-danger" onclick="deleteAnimal(${animal.id})">Excluir</button>
+  </td>
+`;
+    tbody.appendChild(tr);
+  });
+  
+  // Adiciona os campos de filtro
+  const filtros = filtroRow.querySelectorAll('td');
+  filtros[0].innerHTML = '<input type="text" id="filtroProdutor">';
+  filtros[1].innerHTML = '<input type="text" id="filtroIdentificacao" data-coluna="numeroIdentificacao">';
+  filtros[2].innerHTML = '<input type="text" id="filtroNome">';
+  filtros[3].innerHTML = '<input type="text" id="filtroData">';
+  filtros[4].innerHTML = '<input type="text" id="filtroPeso">';
+  filtros[5].innerHTML = '<input type="text" id="filtroPropriedade">';
+  
+  // Adiciona os listeners de eventos aos campos de filtro
+  const inputs = filtroRow.querySelectorAll('input');
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      const coluna = ths[index].dataset.coluna;
+      const valor = input.value;
+      filtrarTabela(coluna, valor);
+    });
+  });
+}
+
+// Adiciona os listeners de eventos aos títulos das colunas
+const tabela = document.getElementById('tabelaAnimais');
+const ths = tabela.querySelectorAll('th');
+const filtroRow = document.getElementById('filtroRow');
+ths.forEach(th => {
+  th.addEventListener('click', () => {
+    const coluna = th.dataset.coluna;
+    const ascendente = th.classList.contains('asc');
+
+    // Remove todas as setas de ordenação
+    ths.forEach(th => {
+      th.classList.remove('asc', 'desc');
+    });
+
+    if (ascendente) {
+      th.classList.add('desc');
+      ordenarTabela(coluna, false);
+    } else {
+      th.classList.add('asc');
+      ordenarTabela(coluna, true);
+    }
+  });
+});
+
+function ordenarTabela(coluna) {
+  const tbody = document.querySelector('tbody');
+  const linhas = Array.from(tbody.querySelectorAll('tr'));
+  const tipo = coluna.dataset.tipo;
+  const indiceColuna = coluna.cellIndex;
+
+  const comparar = (indexA, indexB) => {
+    const valorA = indexA.children[indiceColuna].textContent.trim();
+    const valorB = indexB.children[indiceColuna].textContent.trim();
+
+    if (tipo === 'string') {
+      return valorA.localeCompare(valorB, undefined, { numeric: true, sensitivity: 'base' });
+    } else if (tipo === 'number') {
+      return valorA - valorB;
+    } else if (tipo === 'date') {
+      return new Date(valorA.split('/').reverse().join('-')) - new Date(valorB.split('/').reverse().join('-'));
+    }
+  };
+
+  const direcao = coluna.dataset.ordenacao === 'asc' ? -1 : 1;
+  linhas.sort((linhaA, linhaB) => direcao * comparar(linhaA, linhaB));
+  linhas.forEach(linha => tbody.appendChild(linha));
+
+  // Altera a seta de ordenação
+  const setas = document.querySelectorAll('.seta');
+  setas.forEach(seta => seta.classList.remove('asc', 'desc'));
+  coluna.dataset.ordenacao = coluna.dataset.ordenacao === 'asc' ? 'desc' : 'asc';
+  const seta = coluna.querySelector('.seta');
+  seta.classList.toggle('asc', coluna.dataset.ordenacao === 'asc');
+  seta.classList.toggle('desc', coluna.dataset.ordenacao === 'desc');
+}
+
+
+function filtrarTabela(coluna, valor) {
+  const tbody = document.querySelector('tbody');
+  const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+  linhas.forEach(linha => {
+    const celula = linha.querySelector(`td[data-coluna="${coluna}"]`);
+    if (celula.textContent.includes(valor)) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+}
 
 	</script>

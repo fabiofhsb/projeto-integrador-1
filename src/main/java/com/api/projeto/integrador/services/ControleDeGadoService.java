@@ -1,9 +1,13 @@
 package com.api.projeto.integrador.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.projeto.integrador.models.ControleDeGado;
@@ -23,6 +27,11 @@ public class ControleDeGadoService {
         return controleDeGadoRepository.findByNumeroProdutor(numeroProdutor);
     }
 
+    public String formatDate(Date data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(data);
+    }
+
     public int calcularCabeçasDisponiveis(Date data) {
         List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
         int cabeçasDisponiveis = 0;
@@ -35,4 +44,11 @@ public class ControleDeGadoService {
         }
         return cabeçasDisponiveis;
     }
-}
+    
+    public Page<ControleDeGado> listarCabeçasDeGadoPaginado(int pagina, int tamanhoPagina) {
+        Pageable paginacao = PageRequest.of(pagina, tamanhoPagina);
+        return controleDeGadoRepository.findAll(paginacao);
+    }
+
+    }
+
