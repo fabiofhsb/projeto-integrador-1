@@ -28,11 +28,7 @@ public class ControleDeGadoController {
     @Autowired
     private ControleDeGadoService controleDeGadoService;
 
-    @GetMapping
-    public ResponseEntity<String> teste() {
-    	return ResponseEntity.ok("Teste");
-    }
-    
+       
     @PostMapping
     public ResponseEntity<ControleDeGado> salvar(@RequestBody ControleDeGado controleDeGado) {
         ControleDeGado controleDeGadoSalvo = controleDeGadoService.salvar(controleDeGado);
@@ -59,6 +55,17 @@ public class ControleDeGadoController {
         return ResponseEntity.ok(cabeçasDisponiveis);
     }
     
+    @GetMapping("/vitelos/{data}")
+    
+    public ResponseEntity<Integer> calcularVitelos(
+            @PathVariable @DateTimeFormat(iso = ISO.DATE) Date data,
+            @RequestParam(value = "timeZone", defaultValue = "UTC") String timeZoneId) {
+        TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
+        Calendar calendar = Calendar.getInstance(timeZone);
+        calendar.setTime(data);
+        int vitelosDisponiveis = controleDeGadoService.calcularVitelos(calendar.getTime());
+        return ResponseEntity.ok(vitelosDisponiveis);
+    }
        
     @GetMapping("/cabeças-de-gado")
     public Page<ControleDeGado> listarCabeçasDeGadoPaginado(@RequestParam(defaultValue = "0") int page) {

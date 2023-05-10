@@ -45,6 +45,19 @@ public class ControleDeGadoService {
         return cabeçasDisponiveis;
     }
     
+    public int calcularVitelos(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int vitelosDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int anos = (int) (diferenca / (1000 * 60 * 60 * 24 * 365.25));
+            if (anos >= 1) {
+            	vitelosDisponiveis++;
+            }
+        }
+        return vitelosDisponiveis;
+    }
+    
     public Page<ControleDeGado> listarCabeçasDeGadoPaginado(int pagina, int tamanhoPagina) {
         Pageable paginacao = PageRequest.of(pagina, tamanhoPagina);
         return controleDeGadoRepository.findAll(paginacao);

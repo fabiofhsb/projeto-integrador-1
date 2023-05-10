@@ -46,9 +46,20 @@
 
 
 		h1 {
+			background-color: blue;
 			text-align: center;
 			clear: both;
+			color: white;
+        font-size: 48px;
+        padding-bottom: 20px;
+        line-height: 20px;
 		}
+		
+		h1 img {
+    display: block; /* torna a imagem um elemento de bloco */
+    margin: auto; /* centraliza a imagem horizontalmente */
+    margin-bottom: 10px; /* adiciona uma margem inferior para separar a imagem do texto */
+}
 		
 
 		label, input [type="date"] {
@@ -91,7 +102,10 @@
 </head>
 
 <body>
-	<h1>CONTROLE DE GADO</h1>
+
+	<h1><img src="/images/imagemGado.png" width="120px" height="120px">CONTROLE DE GADO</h1>
+	
+
 	
 <div class="container">
   	<div>
@@ -154,17 +168,28 @@
 
 	<div>
  	 <h2>Consultar animais disponíveis</h2>
+ 	
+ 	 
 		<label for="dataConsulta">Digite a data para verificar os animais disponíveis</label>
 		<input type="date" id="dataConsulta" name="dataConsulta">
 		<button type="button" id="btnConsultar">Consultar animais disponíveis</button>
 		<p></p>
 		<table id=disponiveis>
+			
 			<tr>
 				<td>
 					<p id="qtdCabeças"></p>
 				</td>
 			</tr>
-		</table> 		 		
+			 
+		 
+			<tr>
+				<td>
+					<p id="qtdVitelos"></p>
+				</td>
+			</tr>
+		</table>
+				 	 		 		
 	</div>
 </div>
 
@@ -176,6 +201,7 @@
 		const btnConsultar = document.querySelector("#btnConsultar");
 		const tabelaAnimais = document.querySelector("#tabelaAnimais");
 		const qtdCabecas = document.querySelector("#qtdCabeças");
+		const qtdVitelos = document.querySelector("#qtdVitelos");
 
 		formAnimal.addEventListener("submit", (event) => {
  		 event.preventDefault();
@@ -221,7 +247,7 @@ function lettersOnly(evt) {
     evt = (evt) ? evt : event;
     var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
         ((evt.which) ? evt.which : 0));
-    if (charCode > 31 && (charCode < 65 || charCode > 90) &&
+    if (charCode > 31 && (charCode < 65 || charCode > 90 ) &&
         (charCode < 97 || charCode > 122)) {
         return false;
     }
@@ -302,10 +328,24 @@ function validateForm() {
       const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
       qtdCabeças.innerHTML = `Em ${dataFormatada}, ${data} animais estarão disponíveis para abate`;
       
+      
       // Mostra a div com a resposta e ajusta a altura
       const divQtdCabeças = document.querySelector("#disponiveis");
       divQtdCabeças.style.display = "block";
       divQtdCabeças.style.height = "auto";
+      
+      
+    });
+    fetch(`/animal/vitelos/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdVitelos.innerHTML = `Vitelos:  ${data}`;
+      
+      
+     const divQtdvitelos = document.querySelector("#vitelos");
+      divqtdVitelos.style.display = "block";
+      divqtdVitelos.style.height = "auto";
     });
 });
 
