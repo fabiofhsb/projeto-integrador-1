@@ -60,6 +60,8 @@
 }
 
 
+
+
 		h1 {
 			background-color: #2F2FA2;
 			text-align: center;
@@ -208,15 +210,40 @@
 					<b><p id="qtdCabeças"></p></b>
 				</td>
 			</tr>
-			 
-		 
-			<tr>
+			 <tr>
 				<td>
 					<b><p id="qtdVitelos"></p></b>
 				</td>
+			</tr>	
+			 <tr>
+				<td>
+					<b><p id="qtdSuperPrecoces"></p></b>
+				</td>
 			</tr>
+			 <tr>
+				<td>
+					<b><p id="qtdPrecoces"></p></b>
+				</td>
+			</tr>
+			</tr>
+			 <tr>
+				<td>
+					<b><p id="qtdNovilhos"></p></b>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b><p id="qtdBois"></p></b>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b><p id="qtdTouros"></p></b>
+				</td>
+			</tr>	 
+			
 		</table>
-				 	 		 		
+						 	 		 		
 	</div>
 </div>
 
@@ -229,6 +256,11 @@
 		const tabelaAnimais = document.querySelector("#tabelaAnimais");
 		const qtdCabecas = document.querySelector("#qtdCabeças");
 		const qtdVitelos = document.querySelector("#qtdVitelos");
+		const qtdSuperPrecoces = document.querySelector("#qtdSuperPrecoces");
+		const qtdPrecoces = document.querySelector("#qtdPrecoces");
+		const qtdNovilhos = document.querySelector("#qtdNovilhos");
+		const qtdBois = document.querySelector("#qtdBois");
+		const qtdTouros = document.querySelector("#qtdTouros");
 
 		formAnimal.addEventListener("submit", (event) => {
  		 event.preventDefault();
@@ -370,9 +402,69 @@ function validateForm() {
       qtdVitelos.innerHTML = `Vitelos:  ${data}`;
       
       
-     const divQtdvitelos = document.querySelector("#vitelos");
+     const divQtdvitelos = document.querySelector("#disponiveis");
       divqtdVitelos.style.display = "block";
       divqtdVitelos.style.height = "auto";
+    });
+    
+     fetch(`/animal/superPrecoce/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdSuperPrecoces.innerHTML = `Novilhos Super Precoce:  ${data}`;
+      
+      
+     const divQtdSuperPrecoces = document.querySelector("#disponiveis");
+      qtdSuperPrecoces.style.display = "block";
+      qtdSuperPrecoces.style.height = "auto";
+    });
+    
+     fetch(`/animal/precoce/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdPrecoces.innerHTML = `Novilhos Precoce:  ${data}`;
+      
+      
+     const divQtdPrecoces = document.querySelector("#disponiveis");
+      divQtdPrecoces.style.display = "block";
+      divQtdPrecoces.style.height = "auto";
+    });
+    
+    fetch(`/animal/novilhos/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdNovilhos.innerHTML = `Novilhos:  ${data}`;
+      
+      
+     const divQtdPrecoces = document.querySelector("#disponiveis");
+      divQtdNovilhos.style.display = "block";
+      divQtdNovilhos.style.height = "auto";
+    });
+    
+    fetch(`/animal/bois/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdBois.innerHTML = `Bois:  ${data}`;
+      
+      
+     const divQtdBois = document.querySelector("#disponiveis");
+      divQtdBois.style.display = "block";
+      divQtdBois.style.height = "auto";
+    });
+    
+    fetch(`/animal/touros/${dataConsulta}?timeZone=America/Sao_Paulo`)
+    .then((response) => response.json())
+    .then((data) => {
+		const dataFormatada = new Date(dataConsulta + 'T24:00:00.000Z').toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+      qtdTouros.innerHTML = `Touros:  ${data}`;
+      
+      
+     const divQtdBois = document.querySelector("#disponiveis");
+      divQtdTouros.style.display = "block";
+      divQtdTouros.style.height = "auto";
     });
 });
 

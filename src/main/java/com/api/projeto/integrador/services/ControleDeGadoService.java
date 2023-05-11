@@ -38,7 +38,7 @@ public class ControleDeGadoService {
         for (ControleDeGado controleDeGado : gadoAtingido) {
             long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
             int anos = (int) (diferenca / (1000 * 60 * 60 * 24 * 365.25));
-            if (anos >= 3.5) {
+            if (anos >= 2.5) {
                 cabeçasDisponiveis++;
             }
         }
@@ -50,12 +50,77 @@ public class ControleDeGadoService {
         int vitelosDisponiveis = 0;
         for (ControleDeGado controleDeGado : gadoAtingido) {
             long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
-            int anos = (int) (diferenca / (1000 * 60 * 60 * 24 * 365.25));
-            if (anos >= 1) {
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses <= 10) {
             	vitelosDisponiveis++;
             }
         }
         return vitelosDisponiveis;
+    }
+    
+    public int calcularNovilhosSuperPrecoce(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int NovilhosSuperPrecoceDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses > 10 && meses < 15) {
+            	NovilhosSuperPrecoceDisponiveis++;
+            }
+        }
+        return NovilhosSuperPrecoceDisponiveis;
+    }
+    
+    public int calcularNovilhosPrecoce(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int NovilhosPrecoceDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses >= 15 && meses <= 24) {
+            	NovilhosPrecoceDisponiveis++;
+            }
+        }
+        return NovilhosPrecoceDisponiveis;
+    }
+    
+    public int calcularNovilhos(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int NovilhosDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses >= 18 && meses < 29) {
+            	NovilhosDisponiveis++;
+            }
+        }
+        return NovilhosDisponiveis;
+    }
+    
+    public int calcularBois(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int boisDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses >= 18 && meses < 29) {
+            	boisDisponiveis++;
+            }
+        }
+        return boisDisponiveis;
+    }
+    
+    public int calcularTouros(Date data) {
+        List<ControleDeGado> gadoAtingido = controleDeGadoRepository.findByDataNascimentoBefore(data);
+        int tourosDisponiveis = 0;
+        for (ControleDeGado controleDeGado : gadoAtingido) {
+            long diferenca = data.getTime() - controleDeGado.getDataNascimento().getTime();
+            int meses = (int) (diferenca / (1000 * 60 * 60 * 24 * 30.44));
+            if (meses >= 18 && meses < 29) {
+            	tourosDisponiveis++;
+            }
+        }
+        return tourosDisponiveis;
     }
     
     public Page<ControleDeGado> listarCabeçasDeGadoPaginado(int pagina, int tamanhoPagina) {
