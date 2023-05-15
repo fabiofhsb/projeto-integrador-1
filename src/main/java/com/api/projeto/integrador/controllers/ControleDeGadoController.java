@@ -126,6 +126,8 @@ public ResponseEntity<Integer> calcularTouros(
     int tourosDisponiveis = controleDeGadoService.calcularTouros(calendar.getTime());
     return ResponseEntity.ok(tourosDisponiveis);
 }
+
+
        
     @GetMapping("/cabeças-de-gado")
     public Page<ControleDeGado> listarCabeçasDeGadoPaginado(@RequestParam(defaultValue = "0") int page) {
