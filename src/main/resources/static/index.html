@@ -4,7 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Controle de Gado</title>
+	
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" />
+
+
 	<style>
+	
+	
 	
 	.container {
   display: flex;
@@ -12,25 +18,26 @@
   grid-gap: 10px; /* Simply adjust this value !*/
   grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
   grid-auto-rows: 1fr; 
+  justify-content: center;
   text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
 .container > div:nth-child(1) {
 	background-color: #242582;
   border-radius: 20px;
-  width: 20%;
+  width: 18%;
   padding-bottom: 20px; 
   margin-top: 20px;
   }
 
 .container > div:nth-child(2) {
-  width: 51%;
+  width: 50%;
   padding-bottom: 20px;
-  margin-right: 50px;
-  margin-left: 50px;
+  margin-right: 4%;
+  margin-left: 4%;
   }
 
 .container > div:nth-child(3) {
@@ -63,6 +70,8 @@
 
 
 
+
+
 		h1 {
 			background-color: #2F2FA2;
 			text-align: center;
@@ -75,8 +84,8 @@
         margin-bottom:20px;
         border-radius: 20px;
         width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
+        margin-left: auto;
+        margin-right: auto;
         
 		}
 		
@@ -119,15 +128,16 @@
    			 border-radius: 6px;
 			}
 			
-			.btn {
-			background: red;	
+			.btn_delete {
+			background-color: #FF4500;	
 			color: white;
+			
 			}
 
 		button  {
 			margin-top: 5px;
 			margin-bottom: 5px;
-			background: #DCDCDC;
+			background: white;
 			border-radius: 8px; 
 			padding-top: 5px;
 			padding-bottom: 5px;
@@ -137,9 +147,12 @@
 			margin-top:15px;
 		}
 		
-		#btn-editar {
-			background: #FFD700;
+		.btn_edit {
+			background-color: #FFD700;
 			color: black;
+			
+			
+			
 		}
 		
 		
@@ -151,8 +164,18 @@
    
   table th, table tr, table td {
 	border: 1px solid black;
+	
 	text-align: center;
    	margin: auto;
+   	
+}
+th {
+	background-color: #FFFFF0;
+	
+}
+
+tr:nth-child(even) {
+  background:#FFFFF0;
 }
 
 .filtro{
@@ -188,6 +211,8 @@
 
   
 	</style>
+	
+	
 </head>
 
 <body>
@@ -229,6 +254,20 @@
   <p></p>
   <button onclick="consultarTotalAnimais()">Listar animais</button></h2>
   
+  <form id="formularioEdicao" style="display: none;">
+  <label for="campoNumeroProdutor">Número Produtor:</label>
+  <input type="text" id="campoNumeroProdutor">
+  <label for="campoNomeAnimal">Nome do Animal:</label>
+  <input type="text" id="campoNomeAnimal">
+  <label for="campoDataNascimento">Data de Nascimento:</label>
+  <input type="text" id="campoDataNascimento">
+  <label for="campoPeso">Peso:</label>
+  <input type="text" id="campoPeso">
+  <label for="campoNumeroPropriedade">Número da Propriedade:</label>
+  <input type="text" id="campoNumeroPropriedade">
+  <button type="button" onclick="salvarEdicao()">Salvar</button>
+</form>
+
   <table align="center" id="tabelaAnimais">
     <thead>
       <tr>
@@ -465,8 +504,8 @@ function validateForm() {
       
       
      const divQtdvitelos = document.querySelector("#disponiveis");
-      divqtdVitelos.style.display = "block";
-      divqtdVitelos.style.height = "auto";
+      divQtdvitelos.style.display = "block";
+      divQtdvitelos.style.height = "auto";
     });
     
      fetch(`/animal/superPrecoce/${dataConsulta}?timeZone=America/Sao_Paulo`)
@@ -477,8 +516,8 @@ function validateForm() {
       
       
      const divQtdSuperPrecoces = document.querySelector("#disponiveis");
-      qtdSuperPrecoces.style.display = "block";
-      qtdSuperPrecoces.style.height = "auto";
+      divQtdSuperPrecoces.style.display = "block";
+      divQtdSuperPrecoces.style.height = "auto";
     });
     
      fetch(`/animal/precoce/${dataConsulta}?timeZone=America/Sao_Paulo`)
@@ -500,7 +539,7 @@ function validateForm() {
       qtdNovilhos.innerHTML = `Novilhos:  ${data}`;
       
       
-     const divQtdPrecoces = document.querySelector("#disponiveis");
+     const divQtdNovilhos = document.querySelector("#disponiveis");
       divQtdNovilhos.style.display = "block";
       divQtdNovilhos.style.height = "auto";
     });
@@ -524,7 +563,7 @@ function validateForm() {
       qtdTouros.innerHTML = `Touros:  ${data}`;
       
       
-     const divQtdBois = document.querySelector("#disponiveis");
+     const divQtdTouros = document.querySelector("#disponiveis");
       divQtdTouros.style.display = "block";
       divQtdTouros.style.height = "auto";
     });
@@ -572,13 +611,22 @@ function preencherTabela(animais) {
   <td data-coluna="peso">${animal.peso} Kg</td>
   <td data-coluna="numeroPropriedade">${animal.numeroPropriedade}</td>
   <td>
-    <button type="button" class="btn btn-sm btn-primary" id="btn-editar" onclick="editAnimal(${animal.id})">Editar</button>
-    <button type="button" class="btn btn-sm btn-danger" onclick="deleteAnimal(${animal.id})">Excluir</button>
+    <button type="button" class="btn_edit" onclick="editarAnimal()">
+   <span class="material-symbols-outlined">
+stylus
+</span></button>
+    
+    <button type="button" class="btn_delete" onclick="deleteAnimal(${animal.numeroIdentificacao})">
+    <span class="material-symbols-outlined">
+delete
+</span>
+    </button>
   </td>
 `;
     tbody.appendChild(tr);
   });
   
+    
   // Adiciona os campos de filtro
   const filtros = filtroRow.querySelectorAll('th');
   filtros[0].innerHTML = '<input type="text" id="filtroProdutor">';
@@ -656,6 +704,46 @@ function ordenarTabela(coluna) {
 }
 */
 
+function editarAnimal() {
+  // Obtenha os valores dos campos do formulário
+  var numeroProdutor = document.getElementById('campoNumeroProdutor').value;
+  var nomeAnimal = document.getElementById('campoNomeAnimal').value;
+  var dataNascimento = document.getElementById('campoDataNascimento').value;
+  var peso = document.getElementById('campoPeso').value;
+  var numeroPropriedade = document.getElementById('campoNumeroPropriedade').value;
+
+  // Construa o objeto de dados a ser enviado no corpo da requisição
+  var animalData = {
+    numeroProdutor: numeroProdutor,
+    nomeAnimal: nomeAnimal,
+    dataNascimento: dataNascimento,
+    peso: peso,
+    numeroPropriedade: numeroPropriedade
+  };
+
+  // Envie a requisição PUT para o endpoint
+  fetch('animal/editar', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(animalData)
+  })
+    .then(function(response) {
+      // Verifique a resposta da requisição
+      if (response.ok) {
+        // Faça algo se a requisição for bem-sucedida
+        console.log('Animal editado com sucesso!');
+      } else {
+        // Faça algo se a requisição falhar
+        console.log('Erro ao editar animal');
+      }
+    })
+    .catch(function(error) {
+      console.log('Erro na requisição:', error);
+    });
+}
+
 // Função para filtrar os dados da tabela
 function filtrarTabela() {
   const inputFilters = document.querySelectorAll('.filtro');
@@ -673,6 +761,7 @@ function filtrarTabela() {
       
       if (filtro && texto.indexOf(filtro) === -1) {
         exibeRow = false;
+        
       }
     });
     
@@ -687,4 +776,26 @@ inputFilters.forEach(input => {
   input.addEventListener('input', filtrarTabela);
 });
 
-	</script>
+// Função para salvar as alterações feitas no animal editado
+function salvarEdicao() {
+  // Obtenha os novos valores dos campos do formulário de edição
+  const novoNumeroProdutor = document.getElementById('campoNumeroProdutor').value;
+  const novoNomeAnimal = document.getElementById('campoNomeAnimal').value;
+  const novaDataNascimento = document.getElementById('campoDataNascimento').value;
+  const novoPeso = document.getElementById('campoPeso').value;
+  const novoNumeroPropriedade = document.getElementById('campoNumeroPropriedade').value;
+
+  // Faça algo com os novos valores, como enviar uma solicitação de atualização ao servidor
+
+  // Exemplo: exiba os novos valores no console
+  console.log('Novo Número do Produtor:', novoNumeroProdutor);
+  console.log('Novo Nome do Animal:', novoNomeAnimal);
+  console.log('Nova Data de Nascimento:', novaDataNascimento);
+  console.log('Novo Peso:', novoPeso);
+  console.log('Novo Número da Propriedade:', novoNumeroPropriedade);
+
+  // Oculte o formulário de edição
+  document.getElementById('formularioEdicao').style.display = 'none';
+}
+  
+</script>

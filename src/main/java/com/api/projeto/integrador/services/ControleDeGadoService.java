@@ -27,6 +27,12 @@ public class ControleDeGadoService {
         return controleDeGadoRepository.findByNumeroProdutor(numeroProdutor);
     }
     
+    public List<ControleDeGado> buscarPorNumeroIdentificacao(String numeroIdentificacao) {
+        return controleDeGadoRepository.findByNumeroIdentificacao(numeroIdentificacao);
+    }
+
+
+    
     
     public String formatDate(Date data) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -132,4 +138,5 @@ public class ControleDeGadoService {
     }
 
     }
+
 

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,5 +137,25 @@ public ResponseEntity<Integer> calcularTouros(
     }
 
 
+    @PutMapping("/editar/{data}")
+    public ResponseEntity<String> atualizarAnimal(@PathVariable("numeroIdentificacao") String numeroIdentificacao, @RequestBody ControleDeGadoDTO controleDeGadoDTO) {
+        try {
+            List<ControleDeGado> animais = controleDeGadoService.buscarPorNumeroIdentificacao(numeroIdentificacao);
+            if (!animais.isEmpty()) {
+                ControleDeGado animal = animais.get(0); // Acessa o primeiro animal da lista
+                animal.setNumeroIdentificacao(controleDeGadoDTO.getNumeroIdentificacao());
+                animal.setNumeroProdutor(controleDeGadoDTO.getNumeroProdutor());
+                animal.setDataNascimento(controleDeGadoDTO.getDataNascimento());
+
+                controleDeGadoService.salvar(animal);
+                
+                return ResponseEntity.ok("Animal atualizado com sucesso");
+            } else {
+                return new ResponseEntity<>("Animal não encontrado", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erro ao atualizar animal: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
