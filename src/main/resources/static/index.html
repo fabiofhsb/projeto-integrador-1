@@ -28,13 +28,13 @@
 .container > div:nth-child(1) {
 	background-color: #242582;
   border-radius: 20px;
-  width: 18%;
+  width: 19%;
   padding-bottom: 20px; 
   margin-top: 20px;
   }
 
 .container > div:nth-child(2) {
-  width: 50%;
+  width: 49%;
   padding-bottom: 20px;
   margin-right: 4%;
   margin-left: 4%;
@@ -184,27 +184,27 @@ tr:nth-child(even) {
 }
 
 
-#filtroProdutor{
+#txtColuna1{
 	width: 90%;
 	}
 
-#filtroIdentificacao{
+#txtColuna2{
 	width: 90%;
 }
 
-#filtroNome{
+#txtColuna3{
 	width: 90%;
 }
 
-#filtroData{
+#txtColuna4{
 	width: 90%;
 }
 
-#filtroPeso{
+#txtColuna5{
 	width: 90%;
 }
 
-#filtroPropriedade{
+#txtColuna6{
 	width: 90%;
 }
 
@@ -212,7 +212,29 @@ tr:nth-child(even) {
   
 	</style>
 	
-	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+    <script>
+    $(function(){
+    $("#tabelaAnimais input").keyup(function(){        
+        var index = $(this).parent().index();
+        var nth = "#tabelaAnimais td:nth-child("+(index+1).toString()+")";
+        var valor = $(this).val().toUpperCase();
+        $("#tabelaAnimais tbody tr").show();
+        $(nth).each(function(){
+		var texto = $(this).text().toUpperCase();
+            if (texto.substring(0, valor.length) !== valor){
+                $(this).parent().hide();
+            }
+        });
+    });
+ 
+    $("#tabelaAnimais input").blur(function(){
+        $(this).val("");
+    }); 
+});
+
+    </script> 
+    
 </head>
 
 <body>
@@ -268,8 +290,9 @@ tr:nth-child(even) {
   <button type="button" onclick="salvarEdicao()">Salvar</button>
 </form>
 
-  <table align="center" id="tabelaAnimais">
-    <thead>
+<div id="divConteudo">
+        <table id="tabelaAnimais">
+            <thead>
       <tr>
         <th style="width: 14%;">Nº do Produtor</th>
         <th style="width: 14%;">Nº do Animal</th>
@@ -279,23 +302,23 @@ tr:nth-child(even) {
         <th style="width: 14%;">Nº da Propriedade</th>
         <th style="width: 15%;">Editar/Excluir</th>
       </tr>
-      <tr id="filtroRow">
-        <th><input type="text" id="filtroProdutor" class="filtro" placeholder="Filtrar"></th>
-        <th><input type="text" id="filtroIdentificacao" class="filtro" placeholder="Filtrar"></th>
-        <th><input type="text" id="filtroNome" class="filtro" placeholder="Filtrar"></th>
-        <th><input type="text" id="filtroData" class="filtro" placeholder="Filtrar"></th>
-        <th><input type="text" id="filtroPeso" class="filtro" placeholder="Filtrar"></th>
-        <th><input type="text" id="filtroPropriedade" class="filtro" placeholder="Filtrar"></th>
-      </tr>
-     
-    </thead>
+                <tr>
+                    <th><input type="text" id="txtColuna1"/></th>
+                    <th><input type="text" id="txtColuna2"/></th>
+                    <th><input type="text" id="txtColuna3"/></th>
+                    <th><input type="text" id="txtColuna1"/></th>
+                    <th><input type="text" id="txtColuna2"/></th>
+                    <th><input type="text" id="txtColuna3"/></th>
+                </tr>             
+            </thead>
+            <tbody>
     <tbody>
       <!-- Aqui serão adicionadas as linhas da tabela -->
     </tbody>
     
  	 </table>
 	</div>
-
+			</div>	
 	<div>
  	 <h2>Consultar animais disponíveis</h2>
  	
@@ -344,7 +367,7 @@ tr:nth-child(even) {
 			</tr>	 
 			
 		</table>
-						 	 		 		
+			 	 		 		
 	</div>
 </div>
 
