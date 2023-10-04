@@ -3,6 +3,7 @@ package com.api.projeto.integrador.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,15 +24,16 @@ public class ControleDeGadoService {
         return controleDeGadoRepository.save(controleDeGado);
     }
 
-    public List<ControleDeGado> buscarPorNumeroProdutor(int numeroProdutor) {
-        return controleDeGadoRepository.findByNumeroProdutor(numeroProdutor);
-    }
-    
+        
     public List<ControleDeGado> buscarPorNumeroIdentificacao(String numeroIdentificacao) {
         return controleDeGadoRepository.findByNumeroIdentificacao(numeroIdentificacao);
     }
 
-
+    public void deleteById(UUID id) {
+    	if(controleDeGadoRepository.existsById(id)) {
+    		controleDeGadoRepository.deleteById(id);
+    	}
+    }
     
     
     public String formatDate(Date data) {

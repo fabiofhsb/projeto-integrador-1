@@ -46,54 +46,59 @@
 	text-decoration: none;
 	}
 	
-	.container {
+	/*.container {
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 1,5%; /* Simply adjust this value !*/
-  grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
-  grid-auto-rows: 1fr; 
+  grid-gap: 10px; /* Simply adjust this value !*/
+ /*grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
+  /*grid-auto-rows: 1fr; 
   justify-content: center;
   text-align: center;
   margin-left: auto;
-  margin-right:auto;
-  width: 100%;
+  margin-right: auto;
+  width: 70%;
 }
 
 .container > div:nth-child(1) {
+	background-color: #006400;
   border-radius: 20px;
-  width: 15%;
+  width: 19%;
   padding-bottom: 20px; 
-  margin-top: 0px;
-  margin-left:2%;
+  margin-top: 20px;
   }
 
 .container > div:nth-child(2) {
-  
-  width: 60%;
+  width: 49%;
   padding-bottom: 20px;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-left: 2%;
+  margin-right: 4%;
+  margin-left: 4%;
   }
 
 .container > div:nth-child(3) {
-	
+ background-color: #006400;
  border-radius: 20px;	
-  width: 15%;
+  width: 19%;
   padding-bottom: 20px;
   padding-right: 1%;
   padding-left: 1%;
-  margin-top: 40px;
-  margin-right:2%;
+  margin-top: 20px;
  }
 
 .container>div {
-	height: auto;
+	height: 100%;
+}*/
+
+#listaAnimais{
+  text-align:center;
+  width: 70%;
+  padding-bottom: 20px;
+  margin:auto;
 }
 
 #disponiveis {
 	border: 1px solid black;
-	width: 100%;
+	border-radius:20px;
+	width: 75%;
 	background-color:white;
 	text-align: center;
 	margin: auto;
@@ -275,23 +280,22 @@ tr:nth-child(even) {
 	width: 90%;
 }
 h5{
-	vertical-align:center;
+	vertical-align: center;
 	background-color:#348344;
 	border: 1px solid black;
-	width:100%;
+	width:398.0px;
 	text-align:center;
 	text-align: center;
 	color: white;
     font-size: 25px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 25px;
-    margin-bottom:20px;	
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 0px;
+    margin-bottom:0px;	
 }
 
 
 .ticker {
-	line-height:15px;
   overflow: hidden;
   display: flex;
   width: 100vw;
@@ -303,7 +307,7 @@ h5{
   text-align:center;
 }
 .ticker:hover .ticker__list {
-	animation-play-state: infinite linear;
+  animation-play-state: infinite linear;
 }
 .ticker__item {
 	border: 1px solid #e9e9e9;
@@ -314,17 +318,9 @@ h5{
 
 @keyframes ticker {
   100% {
-    transform: translateX(-100vw); /*try changing this to -100vw*/
+    transform: translateX(-100%); /*try changing this to -100vw*/
   }
 }
-span{
-	color:#424242;
-}
-
-#ww_6170df6b3e605{
-	text-align:center;
-}
-
 
   
 	</style>
@@ -419,78 +415,67 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 		</div>
 	</h3>
 	
-	
 	<h4>
 	<div class="ticker">
     <div class="ticker__list">
-      <a class="ticker__item" href="/bolsa/indices/IBOV">
-                <span>IBOV</span>
-                <span>115.731 pts</span>
-                <span>+1,23%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/indices/IFIX">
-                <span>IFIX</span>
-                <span>3.193 pts</span>
-                <span>+0,00%</span>
-            </a>
-            
-            <a class="ticker__item" href="/moedas/USD-BRL">
-                <span>Dólar Ptax</span>
-                <span>R$ 5,05</span>
-                <span>+0,37%</span>
-            </a>
-            
-            <a class="ticker__item" href="/moedas/EUR-BRL">
-                <span>Euro Ptax</span>
-                <span>R$ 5,34</span>
-                <span>+1,03%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/acoes/CVCB3">
-                <span>CVCB3</span>
-                <span>R$ 2,65</span>
-                <span>+7,29%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/acoes/ASAI3">
-                <span>ASAI3</span>
-                <span>R$ 12,20</span>
-                <span>+5,35%</span>
-            </a>
-            
-            
-         
+      <div class="ticker__item" id="usdItem"><span id="usdPrice">USD-BRL: R$5,009</span></div>
      </div>
   </div></h4>
 	
-	
-	
-	
-<div class="container">
-	<div id="cotacoes">
-	<h5>Cotações Agropecuárias</h5>
-	
-	<!-- Widgets Produtos Cepea - www.cepea.esalq.com.br/br/widget.aspx -->
-<script type="text/javascript" src="https://www.cepea.esalq.usp.br/br/widgetproduto.js.php?fonte=arial&tamanho=11&largura=100%&corfundo=dbd6b2&cortexto=333333&corlinha=ede7bf&id_indicador%5B%5D=2&id_indicador%5B%5D=8&id_indicador%5B%5D=3&id_indicador%5B%5D=77"></script>
-  	
-  		
-	</div>
 		
-    
-<div id="divConteudo">
-<h5>Notícias Agropecuárias</h5>
-        
-			</div>	
-	<div>
-	  
-	  <iframe src="https://api.wo-cloud.com/content/widget/?geoObjectKey=11235853&language=pt&region=BR&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius" name="CW2" scrolling="no" width="318" height="318" frameborder="0" style="border: 1px solid #10658E;border-radius: 8px"></iframe>
- 	 
- 	 
+  	<div id="listaAnimais">
+  
+  
+  <h2>Listar todos os animais
+  <p></p>
+  
+  <button onclick="consultarTotalAnimais()">Listar animais</button></h2>
+  
+  //<form id="formularioEdicao" style="display: none;">
+  <label for="campoNumeroProdutor">Número Produtor:</label>
+  <input type="text" id="campoNumeroProdutor">
+  <label for="campoNomeAnimal">Nome do Animal:</label>
+  <input type="text" id="campoNomeAnimal">
+  <label for="campoDataNascimento">Data de Nascimento:</label>
+  <input type="text" id="campoDataNascimento">
+  <label for="campoPeso">Peso:</label>
+  <input type="text" id="campoPeso">
+  <label for="campoNumeroPropriedade">Número da Propriedade:</label>
+  <input type="text" id="campoNumeroPropriedade">
+  <button type="button" onclick="salvarEdicao()">Salvar</button>
+</form>
 
-			 	 		 		
+<div id="divConteudo">
+        <table id="tabelaAnimais">
+            <thead>
+      <tr>
+        <th style="width: 14%;">Nº do Produtor</th>
+        <th style="width: 14%;">Nº do Animal</th>
+        <th style="width: 14%;">Nome do Animal</th>
+        <th style="width: 14%;">Data de nascimento</th>
+        <th style="width: 14%;">Peso</th>
+        <th style="width: 14%;">Nº da Propriedade</th>
+        <th style="width: 15%;">Editar/Excluir</th>
+      </tr>
+                <tr>
+                    <th><input type="text" id="txtColuna1"/></th>
+                    <th><input type="text" id="txtColuna2"/></th>
+                    <th><input type="text" id="txtColuna3"/></th>
+                    <th><input type="text" id="txtColuna1"/></th>
+                    <th><input type="text" id="txtColuna2"/></th>
+                    <th><input type="text" id="txtColuna3"/></th>
+                </tr>             
+            </thead>
+            <tbody>
+    <tbody>
+      <!-- Aqui serão adicionadas as linhas da tabela -->
+    </tbody>
+    
+ 	 </table>
 	</div>
-</div>
+			</div>	
+	
+	
 
 	
 	

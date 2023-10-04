@@ -46,54 +46,62 @@
 	text-decoration: none;
 	}
 	
-	.container {
+	/*.container {
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 1,5%; /* Simply adjust this value !*/
-  grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
-  grid-auto-rows: 1fr; 
+  grid-gap: 10px; /* Simply adjust this value !*/
+ /*grid-template-columns: repeat(3, 1fr); /* OR grid-template-columns: 1fr 1fr 1fr;*/
+  /*grid-auto-rows: 1fr; 
   justify-content: center;
   text-align: center;
   margin-left: auto;
-  margin-right:auto;
-  width: 100%;
+  margin-right: auto;
+  width: 70%;
 }
 
 .container > div:nth-child(1) {
+	background-color: #006400;
   border-radius: 20px;
-  width: 15%;
+  width: 19%;
   padding-bottom: 20px; 
-  margin-top: 0px;
-  margin-left:2%;
+  margin-top: 20px;
   }
 
 .container > div:nth-child(2) {
-  
-  width: 60%;
+  width: 49%;
   padding-bottom: 20px;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-left: 2%;
+  margin-right: 4%;
+  margin-left: 4%;
   }
 
 .container > div:nth-child(3) {
-	
+ background-color: #006400;
  border-radius: 20px;	
-  width: 15%;
+  width: 19%;
   padding-bottom: 20px;
   padding-right: 1%;
   padding-left: 1%;
-  margin-top: 40px;
-  margin-right:2%;
+  margin-top: 20px;
  }
 
 .container>div {
-	height: auto;
+	height: 100%;
+}*/
+
+#consulta{
+ background-color: #006400;
+  text-align:center;
+  border-radius: 20px;
+  width: 25%;
+  padding-bottom: 20px; 
+  margin-top: 20px;
+  margin:auto;
 }
 
 #disponiveis {
 	border: 1px solid black;
-	width: 100%;
+	border-radius:20px;
+	width: 75%;
 	background-color:white;
 	text-align: center;
 	margin: auto;
@@ -165,6 +173,7 @@
 		 	}
 
 		label, input [type="date"] {
+			height:20px;
 			display: block;
 			margin-bottom: 0px;
 			text-align: center;
@@ -246,52 +255,51 @@ tr:nth-child(even) {
 }
 
 .filtro{
-	width: 100%;
+	width: 95%;
 	
 }
 
 
 #txtColuna1{
-	width: 90%;
+	width: 95%;
 	}
 
 #txtColuna2{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna3{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna4{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna5{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna6{
-	width: 90%;
+	width: 95%;
 }
 h5{
-	vertical-align:center;
+	vertical-align: center;
 	background-color:#348344;
 	border: 1px solid black;
-	width:100%;
+	width:398.0px;
 	text-align:center;
 	text-align: center;
 	color: white;
     font-size: 25px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 25px;
-    margin-bottom:20px;	
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 0px;
+    margin-bottom:0px;	
 }
 
 
 .ticker {
-	line-height:15px;
   overflow: hidden;
   display: flex;
   width: 100vw;
@@ -303,7 +311,7 @@ h5{
   text-align:center;
 }
 .ticker:hover .ticker__list {
-	animation-play-state: infinite linear;
+  animation-play-state: infinite linear;
 }
 .ticker__item {
 	border: 1px solid #e9e9e9;
@@ -317,14 +325,6 @@ h5{
     transform: translateX(-100vw); /*try changing this to -100vw*/
   }
 }
-span{
-	color:#424242;
-}
-
-#ww_6170df6b3e605{
-	text-align:center;
-}
-
 
   
 	</style>
@@ -419,79 +419,67 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 		</div>
 	</h3>
 	
-	
 	<h4>
 	<div class="ticker">
     <div class="ticker__list">
-      <a class="ticker__item" href="/bolsa/indices/IBOV">
-                <span>IBOV</span>
-                <span>115.731 pts</span>
-                <span>+1,23%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/indices/IFIX">
-                <span>IFIX</span>
-                <span>3.193 pts</span>
-                <span>+0,00%</span>
-            </a>
-            
-            <a class="ticker__item" href="/moedas/USD-BRL">
-                <span>Dólar Ptax</span>
-                <span>R$ 5,05</span>
-                <span>+0,37%</span>
-            </a>
-            
-            <a class="ticker__item" href="/moedas/EUR-BRL">
-                <span>Euro Ptax</span>
-                <span>R$ 5,34</span>
-                <span>+1,03%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/acoes/CVCB3">
-                <span>CVCB3</span>
-                <span>R$ 2,65</span>
-                <span>+7,29%</span>
-            </a>
-            
-            <a class="ticker__item" href="/bolsa/acoes/ASAI3">
-                <span>ASAI3</span>
-                <span>R$ 12,20</span>
-                <span>+5,35%</span>
-            </a>
-            
-            
-         
+      <div class="ticker__item" id="usdItem"><span id="usdPrice">USD-BRL: R$5,009</span></div>
      </div>
   </div></h4>
 	
-	
-	
-	
-<div class="container">
-	<div id="cotacoes">
-	<h5>Cotações Agropecuárias</h5>
-	
-	<!-- Widgets Produtos Cepea - www.cepea.esalq.com.br/br/widget.aspx -->
-<script type="text/javascript" src="https://www.cepea.esalq.usp.br/br/widgetproduto.js.php?fonte=arial&tamanho=11&largura=100%&corfundo=dbd6b2&cortexto=333333&corlinha=ede7bf&id_indicador%5B%5D=2&id_indicador%5B%5D=8&id_indicador%5B%5D=3&id_indicador%5B%5D=77"></script>
-  	
-  		
-	</div>
 		
-    
-<div id="divConteudo">
-<h5>Notícias Agropecuárias</h5>
-        
-			</div>	
-	<div>
-	  
-	  <iframe src="https://api.wo-cloud.com/content/widget/?geoObjectKey=11235853&language=pt&region=BR&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius" name="CW2" scrolling="no" width="318" height="318" frameborder="0" style="border: 1px solid #10658E;border-radius: 8px"></iframe>
+  	<div id="consulta">
+  		
+ 	 <h2>Consultar animais disponíveis</h2>
+ 	
  	 
- 	 
-
+		<label for="dataConsulta">Digite a data para verificar os animais disponíveis</label>
+		<input type="date" id="dataConsulta" name="dataConsulta">
+		<button type="button" id="btnConsultar">Consultar animais disponíveis</button>
+		<p></p>
+		<table id=disponiveis>
+			
+			<tr>
+				<td>
+					<b><p id="qtdCabeças"></p></b>
+				</td>
+			</tr>
+			 <tr>
+				<td>
+					<b><p id="qtdVitelos"></p></b>
+				</td>
+			</tr>	
+			 <tr>
+				<td>
+					<b><p id="qtdSuperPrecoces"></p></b>
+				</td>
+			</tr>
+			 <tr>
+				<td>
+					<b><p id="qtdPrecoces"></p></b>
+				</td>
+			</tr>
+			</tr>
+			 <tr>
+				<td>
+					<b><p id="qtdNovilhos"></p></b>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b><p id="qtdBois"></p></b>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b><p id="qtdTouros"></p></b>
+				</td>
+			</tr>	 
+			
+		</table>
 			 	 		 		
 	</div>
-</div>
-
+		
+  
 	
 	
 
@@ -507,139 +495,7 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 		const qtdBois = document.querySelector("#qtdBois");
 		const qtdTouros = document.querySelector("#qtdTouros");
 
-		formAnimal.addEventListener("submit", (event) => {
- 		 event.preventDefault();
-
-  if (validateForm()) {
-    const formData = new FormData(formAnimal);
-
-    fetch("/animal", {
-      method: "POST",
-      body: JSON.stringify(Object.fromEntries(formData.entries())),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-      .then((response) => {
-        if (response.ok) {
-          consultarTotalAnimais();
-          alert("Animal cadastrado com sucesso!");
-          formAnimal.reset();
-        } else {
-          alert("Erro ao cadastrar animal!");
-        }
-      });
-  }
-});
-
-function cpf(v){
-    v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-                                             //de novo (para o segundo bloco de números)
-    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
-    return v
-}
-
-function somenteNumeros(event) {
-	var er = /[^0-9.]/;
-	if (er.test(event.key)) {
-		return false
-	}
-	return true;
-}
-    
-function lettersOnly(evt) {
-  evt = evt || event;
-  var charCode = evt.charCode || evt.keyCode || evt.which || 0;
-
-  // Verificar se o código do caractere está dentro da faixa das letras (maiúsculas e minúsculas) ou caracteres acentuados
-  if (
-    (charCode < 65 || charCode > 90) && // letras maiúsculas
-    (charCode < 97 || charCode > 122) && // letras minúsculas
-    (charCode !== 192 && charCode !== 193 && charCode !== 194 &&
-     charCode !== 195 && charCode !== 196 && charCode !== 197 && charCode !== 198 &&
-     charCode !== 199 && charCode !== 200 && charCode !== 201 && charCode !== 202 &&
-     charCode !== 203 && charCode !== 204 && charCode !== 205 && charCode !== 206 &&
-     charCode !== 207 && charCode !== 208 && charCode !== 209 && charCode !== 210 &&
-     charCode !== 211 && charCode !== 212 && charCode !== 213 && charCode !== 214 &&
-     charCode !== 216 && charCode !== 217 && charCode !== 218 && charCode !== 219 &&
-     charCode !== 220 && charCode !== 221 && charCode !== 222 && charCode !== 223 &&
-     charCode !== 224 && charCode !== 225 && charCode !== 226 && charCode !== 227 &&
-     charCode !== 228 && charCode !== 229 && charCode !== 230 && charCode !== 231 &&
-     charCode !== 232 && charCode !== 233 && charCode !== 234 && charCode !== 235 &&
-     charCode !== 236 && charCode !== 237 && charCode !== 238 && charCode !== 239 &&
-     charCode !== 240 && charCode !== 241 && charCode !== 242 && charCode !== 243 &&
-     charCode !== 244 && charCode !== 245 && charCode !== 246 && charCode !== 248 &&
-     charCode !== 249 && charCode !== 250 && charCode !== 251 && charCode !== 252 &&
-     charCode !== 253 && charCode !== 254 && charCode !== 255)
-  ) {
-    return false;
-  }
-  return true;
-}
-
-
-function validateForm() {
-  const numeroProdutor = document.querySelector("#numeroProdutor").value;
-  const cpfProdutor = document.querySelector("#cpfProdutor").value;
-  const numeroPropriedade = document.querySelector("#numeroPropriedade").value;
-  const numeroIdentificacao = document.querySelector("#numeroIdentificacao").value;
-  const nomeAnimal = document.querySelector("#nomeAnimal").value;
-  const dataNascimento = document.querySelector("#dataNascimento").value;
-  const sexo = document.querySelector("#sexo").value;
-  const peso = document.querySelector("#peso").value;
-
-  // Validação do número do produtor
-  if (numeroProdutor.maxlength == 7) {
-    alert("O número do produtor deve ter 7 dígitos.");
-    return false;
-  }
-
-  // Validação do CPF do produtor
-  if (cpfProdutor.length !== 11) {
-    alert("O CPF do produtor deve ter 11 dígitos.");
-    return false;
-  }
-
-  // Validação do número da propriedade
-  if (numeroPropriedade === "") {
-    alert("O número da propriedade é obrigatório.");
-    return false;
-  }
-
-  // Validação do número de identificação do animal
-  if (numeroIdentificacao === "") {
-    alert("O número de identificação do animal é obrigatório.");
-    return false;
-  }
-
-  // Validação do nome do animal
-  if (nomeAnimal === "") {
-    alert("O nome do animal é obrigatório.");
-    return false;
-  }
-
-  // Validação da data de nascimento
-  if (dataNascimento === "") {
-    alert("A data de nascimento é obrigatória.");
-    return false;
-  }
-
-  // Validação do sexo
-  if (sexo === "") {
-    alert("O sexo é obrigatório.");
-    return false;
-  }
-
-  // Validação do peso
-  if (peso === "" || peso <= 0) {
-    alert("O peso é obrigatório e deve ser maior que zero.");
-    return false;
-  }
-
-  return true;
-}
-
-
+		
 
 
 		btnConsultar.addEventListener("click", () => {
