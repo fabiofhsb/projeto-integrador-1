@@ -136,7 +136,7 @@
 }
 		
 		h2 {
-			background-color: #006400;
+			background-color: #223b48;
 			text-align: center;
 			color: white;
 			border-radius: 20px;
@@ -154,7 +154,7 @@
         padding-top: 20px;
         padding-bottom: 0px;
         line-height: 0px;
-        margin-bottom:0px;
+        margin-bottom:20px;
         width: auto;
         margin-left: auto;
         margin-right: auto;
@@ -208,22 +208,22 @@
 		}
 		
 		.btn_edit {
-			background-color: #FFD700;
+			background-color: #FFFACD;
 			color: black;
 			margin-right: 4%;
-			padding-top: 2px;
-			padding-bottom: 2px;
-			margin-top: 3%;
-			margin-bottom: 3%;		
+			padding-top: 0px;
+			padding-bottom: 0px;
+			margin-top: 1%;
+			margin-bottom: 1%;		
 		}
 			
 			.btn_delete {
-			background-color: #FF4500;	
+			background-color: #FA8072;	
 			color: white;
-			padding-top: 2px;
-			padding-bottom: 2px;
-			margin-top: 0px;
-			margin-bottom: 0px;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			margin-top: 1%;
+			margin-bottom: 1%;
 			}
 		
 		
@@ -242,42 +242,44 @@
    	
 }
 th {
-	background-color: #FFFFF0;
+	background-color: #D3D3D3;
 	
 }
 
 tr:nth-child(even) {
-  background:#FFFFF0;
+  background:#D3D3D3;
 }
+
 
 .filtro{
 	width: 100%;
+	
 	
 }
 
 
 #txtColuna1{
-	width: 90%;
+	width: 95%;
 	}
 
 #txtColuna2{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna3{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna4{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna5{
-	width: 90%;
+	width: 95%;
 }
 
 #txtColuna6{
-	width: 90%;
+	width: 95%;
 }
 h5{
 	vertical-align: center;
@@ -296,6 +298,7 @@ h5{
 
 
 .ticker {
+	line-height:15px;
   overflow: hidden;
   display: flex;
   width: 100vw;
@@ -307,7 +310,7 @@ h5{
   text-align:center;
 }
 .ticker:hover .ticker__list {
-  animation-play-state: infinite linear;
+	animation-play-state: infinite linear;
 }
 .ticker__item {
 	border: 1px solid #e9e9e9;
@@ -318,8 +321,27 @@ h5{
 
 @keyframes ticker {
   100% {
-    transform: translateX(-100%); /*try changing this to -100vw*/
+    transform: translateX(-100vw); /*try changing this to -100vw*/
   }
+}
+span{
+	color:#424242;
+}
+h7{ 
+	height:40px;
+	width:95px;
+	background:	#223b48;
+	color:	#223b48;
+	position:absolute;
+}
+h8{ 
+	
+	height:40px;
+	width:95px;
+	background:	#223b48;
+	color:	#223b48;
+	position:absolute;
+	right: 0;
 }
 
   
@@ -409,18 +431,30 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 	
 	<h3><div id="area-menu">
 			<a href="index.html">Home</a>  
-			<a href="cadastro.html">Cadastrar Animal</a>
-			<a href="consulta.html">Consultar animais disponíveis</a>
-			<a href="listaAnimais.html">Animais</a>
+			<a href="cadastro.html">Cadastro de Animais</a>
+			<a href="listaAnimais.html">Listar Animais</a>
+			<a href="consulta.html">Disponibilidade de Animais</a>
 		</div>
 	</h3>
 	
-	<h4>
-	<div class="ticker">
-    <div class="ticker__list">
-      <div class="ticker__item" id="usdItem"><span id="usdPrice">USD-BRL: R$5,009</span></div>
-     </div>
-  </div></h4>
+	<h7>teste</h7> <h8>teste</h8>
+<!-- SimpleFX widget LIVE QUOTES BAR - START -->
+<div class="sfx-widget" id="sfx-live-quotes-bar"></div>
+<script type="text/javascript" src="https://widgets.simplefx.com/sfx-widget.js"></script>
+<script type="text/javascript">
+	sfx('liveQuotesBar', {
+		containerId: 'sfx-live-quotes-bar',
+		language: 'auto',
+		width: "100%",
+		height: "40px",
+		symbols: ["BTCUSD","GOOG.US","USDSEK","PETROBRA.BR","ITAU.BR","ITAU.BR","VALE.BR","VALE.BR","SUZANO.BR","SUZANO.BR","COSAN.BR","COSAN.BR","B3.BR","B3.BR","MAGALU.BR","MAGALU.BR"],
+		theme: "dark",
+		alignLogo: "left",
+		customElements: ["sessionChange"],
+
+	})
+</script>
+<!-- SimpleFX widget - END -->
 	
 		
   	<div id="listaAnimais">
@@ -431,7 +465,7 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
   
   <button onclick="consultarTotalAnimais()">Listar animais</button></h2>
   
-  //<form id="formularioEdicao" style="display: none;">
+  <form id="formularioEdicao" style="display: none;">
   <label for="campoNumeroProdutor">Número Produtor:</label>
   <input type="text" id="campoNumeroProdutor">
   <label for="campoNomeAnimal">Nome do Animal:</label>
