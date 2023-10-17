@@ -349,6 +349,58 @@ h8{
 	position:absolute;
 	right: 0;
 }
+h9{
+	position:absolute;
+	right: 20%;
+	bottom:81%;
+	font-size:21px;
+}
+
+#noticias {
+  position: relative;
+}
+
+#noticias::before {
+	pointer-events: none;
+  content: "";
+  background-image: url('/images/gado2.jpg');
+  background-size: cover;
+  border-radius: 5px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/*h1 {
+  background-image: url('/images/nelores.jpg');
+  background-size: cover;
+  }*/
+  
+  #meuTexto {
+	margin-top:0px;
+    font-size: 19px; /* Tamanho inicial da fonte */
+}
+#aumentarFonte {
+	color:white;
+	font-size:17px;
+	bottom:80%;
+	border:0px;
+	background-color:#348344;
+	position:absolute;
+	right: 17%;
+}
+#diminuirFonte {
+	color:white;
+	font-size:17px;
+	bottom:80%;
+	border:0px;
+	background-color:#348344;
+	position:absolute;
+	right: 15%;
+}
+
 
   
 	</style>
@@ -373,6 +425,7 @@ h8{
         $(this).val("");
     }); 
 });
+
 
 /*const ticker = document.querySelector('.ticker')
 const list = document.querySelector('.ticker__list')
@@ -433,13 +486,18 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 
 <body>
 
-	<h1><img src="/images/imagemGado.png" width="110px" height="110px">CONTROLE DE GADO</h1>
+	<h1><img src="/images/imagemGado.png" width="110px" height="110px">CONTROLE DE GADO <h9>Acessibilidade</h9><button id="aumentarFonte">A+</button>
+			<button id="diminuirFonte">A-</button></h1>
 	
 	<h3><div id="area-menu">
-			<a href="index.html">Home</a>  
+			<p id="meuTexto"><a href="index.html">Home</a>  
 			<a href="cadastro.html">Cadastro de Animais</a>
 			<a href="listaAnimais.html">Listar Animais</a>
-			<a href="consulta.html">Disponibilidade de Animais</a>
+			<a href="consulta.html">Disponibilidade de Animais</a></p>
+			
+			
+			
+
 		</div>
 	</h3>
 	
@@ -483,9 +541,12 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
     
 <div id="divConteudo">
 <h5>ÚLTIMAS NOTÍCIAS</h5>
+<div id="noticias">
 <!-- Widgets Notícias Agrícolas - www.noticiasagricolas.com.br/widgets -->
 <script type="text/javascript" src="https://www.noticiasagricolas.com.br/widgets/noticias?subsecao=8,156,149,26,105,107,159&largura=100%&altura=100%&fonte=Arial%2C%20Helvetica%2C%20sans-serif&tamanho=10pt&cortexto=333333&corlink=006666&qtd=15&output=js"></script>
+
 			</div>	
+</div>
 	<div>
 	  <h5>Previsão do Tempo</h5>
 	  <iframe src="https://api.wo-cloud.com/content/widget/?geoObjectKey=11235853&language=pt&region=BR&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius" name="CW2" scrolling="no" width="318" height="318" frameborder="0" style="border: 1px solid #10658E;border-radius: 8px"></iframe>
@@ -500,7 +561,7 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 	
 
 	<script>
-		const formAnimal = document.querySelector("#form-animal");
+		/*const formAnimal = document.querySelector("#form-animal");
 		const btnConsultar = document.querySelector("#btnConsultar");
 		const tabelaAnimais = document.querySelector("#tabelaAnimais");
 		const qtdCabecas = document.querySelector("#qtdCabeças");
@@ -641,12 +702,30 @@ function validateForm() {
   }
 
   return true;
-}
+}*/
+
+//Aumentar o tamanho da fonte (acessibilidade)
+const aumentarBotao = document.getElementById('aumentarFonte');
+const diminuirBotao = document.getElementById('diminuirFonte');
+const meuTexto = document.getElementById('meuTexto');
+
+aumentarBotao.addEventListener('click', function() {
+    const tamanhoAtual = window.getComputedStyle(meuTexto).fontSize;
+    const novoTamanho = parseFloat(tamanhoAtual) + 2; // Aumenta 2 pixels
+    meuTexto.style.fontSize = novoTamanho + 'px';
+});
+
+diminuirBotao.addEventListener('click', function() {
+    const tamanhoAtual = window.getComputedStyle(meuTexto).fontSize;
+    const novoTamanho = parseFloat(tamanhoAtual) - 2; // Diminui 2 pixels
+    meuTexto.style.fontSize = novoTamanho + 'px';
+});
 
 
 
 
-		btnConsultar.addEventListener("click", () => {
+
+		/*btnConsultar.addEventListener("click", () => {
   const dataConsulta = document.querySelector("#dataConsulta").value;
   
 
@@ -861,7 +940,7 @@ ths.forEach(th => {
 }
 */
 
-function editarAnimal() {
+/*function editarAnimal() {
   // Obtenha os valores dos campos do formulário
   var numeroProdutor = document.getElementById('campoNumeroProdutor').value;
   var nomeAnimal = document.getElementById('campoNomeAnimal').value;
@@ -985,6 +1064,6 @@ const deleteButtons = document.querySelectorAll('.btn_delete');
 // Adicione um evento de clique a cada botão
 deleteButtons.forEach((button) => {
   button.addEventListener('click', deleteAnimal);
-});
+});*/
 
 </script>
