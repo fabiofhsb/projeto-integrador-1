@@ -343,7 +343,35 @@ h8{
 	position:absolute;
 	right: 0;
 }
+h9{
+	position:absolute;
+	right: 20%;
+	bottom:81%;
+	font-size:21px;
+}
 
+  #meuTexto {
+	margin-top:0px;
+    font-size: 19px; /* Tamanho inicial da fonte */
+}
+#aumentarFonte {
+	color:white;
+	font-size:17px;
+	bottom:80%;
+	border:0px;
+	background-color:#348344;
+	position:absolute;
+	right: 17%;
+}
+#diminuirFonte {
+	color:white;
+	font-size:17px;
+	bottom:80%;
+	border:0px;
+	background-color:#348344;
+	position:absolute;
+	right: 15%;
+}
 
 
   
@@ -429,13 +457,18 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 
 <body>
 
-	<h1><img src="/images/imagemGado.png" width="110px" height="110px">CONTROLE DE GADO</h1>
+	<h1><img src="/images/imagemGado.png" width="110px" height="110px">CONTROLE DE GADO <h9>Acessibilidade</h9><button id="aumentarFonte">A+</button>
+			<button id="diminuirFonte">A-</button></h1>
 	
 	<h3><div id="area-menu">
-			<a href="index.html">Home</a>  
+			<p id="meuTexto"><a href="index.html">Home</a>  
 			<a href="cadastro.html">Cadastro de Animais</a>
 			<a href="listaAnimais.html">Listar Animais</a>
-			<a href="consulta.html">Disponibilidade de Animais</a>
+			<a href="consulta.html">Disponibilidade de Animais</a></p>
+			
+			
+			
+
 		</div>
 	</h3>
 	
@@ -517,6 +550,23 @@ setInterval(updateCurrencyPrices, 60000); // 60 segundos em milissegundos
 	
 
 	<script>
+	const aumentarBotao = document.getElementById('aumentarFonte');
+const diminuirBotao = document.getElementById('diminuirFonte');
+const meuTexto = document.getElementById('meuTexto');
+
+aumentarBotao.addEventListener('click', function() {
+    const tamanhoAtual = window.getComputedStyle(meuTexto).fontSize;
+    const novoTamanho = parseFloat(tamanhoAtual) + 2; // Aumenta 2 pixels
+    meuTexto.style.fontSize = novoTamanho + 'px';
+});
+
+diminuirBotao.addEventListener('click', function() {
+    const tamanhoAtual = window.getComputedStyle(meuTexto).fontSize;
+    const novoTamanho = parseFloat(tamanhoAtual) - 2; // Diminui 2 pixels
+    meuTexto.style.fontSize = novoTamanho + 'px';
+});
+	
+	
 		const formAnimal = document.querySelector("#form-animal");
 		const btnConsultar = document.querySelector("#btnConsultar");
 		const tabelaAnimais = document.querySelector("#tabelaAnimais");
